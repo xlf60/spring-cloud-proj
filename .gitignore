@@ -1,0 +1,16 @@
+# Project exclude paths
+/out/
+/platform/gateway/target/
+/platform/hystrix-dashboard/target/
+/platform/rocketmq/b-rocketmq-boot-p/target/
+/platform/turbine/target/
+/platform/zipkin/target/
+/service/employee-service/employee-api/target/
+/service/employee-service/employee-dao/target/
+/service/employee-service/employee-service-core/target/
+/service/employee-service/target/
+/service/oauth-service/target/
+/service/restroom-service/restroom-api/target/
+/service/restroom-service/restroom-dao/target/
+/service/restroom-service/restroom-service-core/target/
+/service/restroom-service/target/

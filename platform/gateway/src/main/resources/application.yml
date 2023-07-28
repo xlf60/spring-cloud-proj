@@ -1,0 +1,90 @@
+server:
+  port: 40000
+
+
+hystrix:
+  command:
+    fallbackName:
+      fallback:
+        enabled: true
+      circuitBreaker:
+        enabled: true
+        requestVolumeThreshold: 5 #熔断触发的最小个数10s 默认值：20
+        sleepWindowInMilliseconds: 10000  #熔断多少秒后去尝试请求  默认值：5000
+        errorThresholdPercentage: 50 #失败率达到多少百分比后熔断 默认值：50
+      execution:
+        timeout:
+          #是否应该有超时
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000 #全局超时时间  默认值：1000
+            interruptOnTimeout: true    #超时后是否中断线程 默认值：true
+            interruptOnCancel: true     # 取消调用后是否中断线程，默认值为false
+
+spring:
+  application:
+    name: gateway-service
+
+  redis:
+    host: 47.120.15.216
+    port: 11021
+    database: 0
+    password: 123456
+
+  cloud:
+    nacos:
+      discovery:
+        serverAddr: localhost:8848
+    gateway:
+      # 配合hystrix进行降级
+      #      defaultFilters:
+      #        name: Hystrix
+      #        args:
+      #          name : fallback
+      #          fallbackUri: forward:/global-error
+      globalcors:
+        # 跨域
+        cors-configurations:
+          '[/**]': # 全路径请求
+            allowed-origins:
+              - "http://localhost:10000"
+              - "*"
+            expose-header: "*"
+            allow-credentials: true
+            allowed-methods: "*"
+            allowed-headers: "*"
+            max-age: 100
+
+      discovery:
+        locator:
+          enabled: false
+
+  sleuth:
+    sampler:
+      # 采样率100%
+      probability: 1
+      #每秒最多采用100个trace
+      rate: 100
+
+  zipkin:
+    sender:
+      type: rabbit
+    rabbitmq:
+      passwd: guest
+      username: guest
+      queue: zipkin
+      #      addresses: 192.168.10.130:5672
+      addresses: 47.120.15.216:5672
+
+# 开启所有actuator-endpoint
+management:
+  endpoint:
+    health:
+      show-components: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  security:
+    enabled: false

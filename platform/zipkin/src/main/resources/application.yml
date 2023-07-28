@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: zipkin-server
+  cloud:
+    nacos:
+      discovery:
+        serverAddr: localhost:8848
+
+        clusterName: Cluster-2
+
+        heartBeatInterval: 5000
+
+        #服务剔除的时间(标记不健康)
+        heartBeatTimeout: 15000
+
+zipkin:
+  collector:
+    rocketmq:
+      addresses: 192.168.10.130:9876
+      group: zipkin
+      topic: zipkin
+#    rabbitmq:
+#      addresses: 47.120.15.216:5672
+#      passwd: guest
+#      username: guest
+#      queue: zipkin
+#  main:
+#    # 同意bean的覆盖
+#    allow-bean-definition-overriding: true
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+server:
+  port: 30000
+
+logging:
+  pattern:
+    dateformat: HH:mm:ss.SSS

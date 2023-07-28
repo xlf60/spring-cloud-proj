@@ -1,0 +1,33 @@
+server:
+  port: 20000
+
+spring:
+  application:
+    name: restroom-service
+
+  cloud:
+    nacos:
+      config:
+        serverAddr: 127.0.0.1:8848
+#        serverAddr: 47.120.15.216:8848
+        fileExtension: yml
+
+      discovery:
+        server-addr: 127.0.0.1:8848
+#        server-addr: 47.120.15.216:8848
+#        metadata:
+#          myname: xlf
+#          mylover: xxx
+
+        # 心跳间隔时间(毫秒)
+#        heartBeatInterval: 5000
+        #服务剔除的时间(标记不健康)
+#        heartBeatTimeout: 15000
+        # 防止意外宕机的防范措施
+      #        namingLoadCacheAtStart: false
+#        clusterName: Cluster-2
+      #        namespace: ab65b115-a900-44b3-9053-4378e0fb49b3
+      #        group: myGroup
+      #        #是否可以注册,默认是TRUE
+      #        registerEnabled: true
+      #        watchDelay: 30000

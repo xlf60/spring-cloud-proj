@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: turbine-server
+  cloud:
+    nacos:
+      discovery:
+        serverAddr: localhost:8848
+
+server:
+  port: 30001
+
+turbine:
+  aggregator:
+    # 默认集群， 可指定采集信息的目标集群
+    clusterConfig: default
+  appConfig: employee-service
+  clusterNameExpression: '"delault"'
+  combineHostPort: true

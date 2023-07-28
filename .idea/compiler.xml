@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="employee-service-core" />
+        <module name="turbine" />
+        <module name="zipkin" />
+        <module name="restroom-service" />
+        <module name="b-rocketmq-boot-p1" />
+        <module name="oauth-service" />
+        <module name="employee-service" />
+        <module name="restroom-service-core" />
+        <module name="employee-api" />
+        <module name="restroom-api" />
+        <module name="hystrix-dashboard" />
+        <module name="employee-dao" />
+        <module name="restroom-dao" />
+        <module name="b-rocketmq-boot-p" />
+        <module name="gateway" />
+        <module name="c-rocketmq-boot-c" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="b-rocketmq-boot-p1" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

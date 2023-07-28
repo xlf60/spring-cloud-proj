@@ -1,0 +1,114 @@
+server:
+#  port: 20000
+  # 压缩
+  compression:
+    enabled: true
+  error:
+    include-exception: true
+#    include-stacktrace: on_param
+    include-message: always
+spring:
+  profiles:
+    active: dev
+
+#  application:
+#    name: restroom-service
+  sleuth:
+    sampler:
+#       采样率100%
+      probability: 1
+#      每秒最多采用100个trace
+      rate: 100
+
+  zipkin:
+    sender:
+      type: rabbit
+    rabbitmq:
+      addresses: 47.120.15.216:5672
+  #      queue: zipkin
+#      addresses: 47.120.15.216:5672
+
+  #    sender:
+#      type: web
+#    discoveryClientEnabled: true
+#    baseUrl: http://zipkin-server
+#    locator:
+#      discovery:
+#        enabled: true
+  cloud:
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
+    alibaba:
+      seata:
+        txServiceGroup: seata-server
+#    nacos:
+#      discovery:
+#        server-addr: localhost:8848
+#        metadata:
+#          myname: xlf
+#          mylover: xxx
+
+        # 心跳间隔时间(毫秒)
+#        heartBeatInterval: 5000
+        #服务剔除的时间(标记不健康)
+#        heartBeatTimeout: 15000
+        # 防止意外宕机的防范措施
+#        namingLoadCacheAtStart: false
+#        clusterName: Cluster-2
+#        namespace: ab65b115-a900-44b3-9053-4378e0fb49b3
+#        group: myGroup
+#        #是否可以注册,默认是TRUE
+#        registerEnabled: true
+#        watchDelay: 30000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/toilet_db?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 111111
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #  spring.datasource.url=jdbc:mysql://localhost:3306/powernode?serverTimezone=GMT
+    #  spring.datasource.username=root
+    #  spring.datasource.password=123456
+    hikari:
+      connection-timeout: 20000
+      idle-timeout: 20000
+      maximum-pool-size: 20
+      minimum-idle: 5
+      max-lifetime: 30000
+      auto-commit: true
+      pool-name: imoocDatasourcePool
+
+# 开启所有actuator-endpoint
+management:
+  endpoint:
+    health:
+      show-components: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  security:
+    enabled: false
+
+seata:
+  applicationId: restroom-service
+  registry:
+    type: nacos
+    nacos:
+      serverAddr: 127.0.0.1:8848
+#      serverAddr: 47.120.15.216:8848
+      application: seata-server
+      namespace: public
+      cluster: default
+      group: DEFAULT_GROUP
+  service:
+    vgroupMapping:
+      seata-server: default
